@@ -1,0 +1,86 @@
+#!/bin/sh
+# This configure script written by Brian Callahan <bcallah@openbsd.org>
+# and released into the Public Domain.
+
+cflags="-O2 -pipe"
+
+# Need lex and yacc
+printf "checking for lex... "
+/usr/bin/which lex > /dev/null 2>&1
+if [ $? -eq 0 ] ; then
+  echo "yes"
+  ll="-ll"
+else
+  /usr/bin/which flex > /dev/null 2>&1
+  if [ $? -eq 0 ] ; then
+    echo "yes"
+    ll="-lfl"
+  else
+    echo "no"
+    echo "You must have lex or flex to build m4!"
+    exit 1
+  fi
+fi
+
+printf "checking for yacc... "
+/usr/bin/which yacc > /dev/null 2>&1
+if [ $? -eq 0 ] ; then
+  echo "yes"
+else
+  echo "no"
+  echo "You must have yacc to build m4!"
+  exit 1
+fi
+
+# Set executable name accordingly
+printf "checking for m4... "
+/usr/bin/which m4 > /dev/null 2>&1
+if [ $? -eq 0 ] ; then
+  echo "yes"
+  m4name="om4"
+else
+  echo "no"
+  m4name="m4"
+fi
+
+cat << EOF > GNUmakefile
+# This GNUmakefile generated automatically by configure.
+
+PROG=	$m4name
+CFLAGS=	$cflags
+CFLAGS+=-DEXTENDED -I.
+OBJS=	eval.o expr.o look.o main.o misc.o gnum4.o trace.o tokenizer.o parser.o
+LIBS=	$ll -lm
+
+UNAME_S := \$(shell uname -s)
+ifeq (\$(UNAME_S),Linux)
+CFLAGS+=-D_GNU_SOURCE -D__dead="__attribute__((__noreturn__))"
+OBJS+=	ohash.o reallocarray.o strtonum.o
+else ifeq (\$(findstring CYGWIN,\$(UNAME_S)),CYGWIN)
+CFLAGS+=-D_GNU_SOURCE -D__dead="__attribute__((__noreturn__))"
+OBJS+=	ohash.o reallocarray.o strtonum.o
+endif
+
+all: \${OBJS}
+	\${CC} \${LDFLAGS} -o \${PROG} \${OBJS} \${LIBS}
+
+install: all
+	install -d \${DESTDIR}\${BINDIR}
+	install -d \${DESTDIR}\${MANDIR}
+	install -m 555 \${PROG} \${DESTDIR}\${BINDIR}
+	install -m 444 m4.1 \${DESTDIR}\${MANDIR}/\${PROG}.1
+
+test:
+	@echo "No tests"
+
+parser.c parser.h: parser.y
+	\${YACC} -d parser.y && mv y.tab.c parser.c && mv y.tab.h parser.h
+
+tokenizer.o: parser.h
+
+clean:
+	rm -f \${PROG} \${OBJS} parser.c parser.h
+
+distclean: clean
+	rm -f GNUmakefile
+EOF
