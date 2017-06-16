@@ -55,7 +55,7 @@ LIBS=	$ll -lm
 UNAME_S := \$(shell uname -s)
 ifeq (\$(UNAME_S),Linux)
 CFLAGS+=-D_GNU_SOURCE -D__dead="__attribute__((__noreturn__))"
-OBJS+=	ohash.o reallocarray.o strtonum.o
+OBJS+=	ohash.o reallocarray.o strlcpy.o strtonum.o
 else ifeq (\$(findstring CYGWIN,\$(UNAME_S)),CYGWIN)
 CFLAGS+=-D_GNU_SOURCE -D__dead="__attribute__((__noreturn__))"
 OBJS+=	ohash.o reallocarray.o strtonum.o
