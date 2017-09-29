@@ -182,5 +182,7 @@ extern int fatal_warns;		/* make warnings fatal */
 
 /* portability */
 extern void *reallocarray(void *, size_t, size_t);
-extern size_t strlcpy(char *, const char *, size_t);
 extern long long strtonum(const char *, long long, long long, const char **);
+#ifdef __linux__
+extern size_t strlcpy(char *, const char *, size_t);
+#endif

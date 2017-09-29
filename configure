@@ -4,17 +4,38 @@
 
 cflags="-O2 -pipe"
 
+printf "checking for C compiler... "
+/usr/bin/which cc > /dev/null 2>&1
+if [ $? -eq 0 ] ; then
+  echo "cc"
+  cc="cc"
+else
+  /usr/bin/which clang > /dev/null 2>&1
+  if [ $? -eq 0 ] ; then
+    echo "clang"
+    cc="clang"
+  else
+    /usr/bin/which gcc > /dev/null 2>&1
+    if [ $? -eq 0 ] ; then
+      echo "gcc"
+      cc="gcc"
+    else
+      echo "not found"
+      echo "You must have a C compiler to build m4!"
+      exit 1
+    fi
+  fi
+fi
+
 # Need lex and yacc
 printf "checking for lex... "
 /usr/bin/which lex > /dev/null 2>&1
 if [ $? -eq 0 ] ; then
   echo "yes"
-  ll="-ll"
 else
   /usr/bin/which flex > /dev/null 2>&1
   if [ $? -eq 0 ] ; then
     echo "yes"
-    ll="-lfl"
   else
     echo "no"
     echo "You must have lex or flex to build m4!"
@@ -27,9 +48,14 @@ printf "checking for yacc... "
 if [ $? -eq 0 ] ; then
   echo "yes"
 else
-  echo "no"
-  echo "You must have yacc to build m4!"
-  exit 1
+  /usr/bin/which bison > /dev/null 2>&1
+  if [ $? -eq 0 ] ; then
+  echo "yes"
+  else
+    echo "no"
+    echo "You must have yacc to build m4!"
+    exit 1
+  fi
 fi
 
 # Set executable name accordingly
@@ -47,15 +73,25 @@ cat << EOF > GNUmakefile
 # This GNUmakefile generated automatically by configure.
 
 PROG=	$m4name
-CFLAGS=	$cflags
+CC?=	$cc
+CFLAGS?=$cflags
 CFLAGS+=-DEXTENDED -I.
 OBJS=	eval.o expr.o look.o main.o misc.o gnum4.o trace.o tokenizer.o parser.o
-LIBS=	$ll -lm
+LIBS=	-lm
 
 UNAME_S := \$(shell uname -s)
 ifeq (\$(UNAME_S),Linux)
 CFLAGS+=-D_GNU_SOURCE -D__dead="__attribute__((__noreturn__))"
 OBJS+=	ohash.o reallocarray.o strlcpy.o strtonum.o
+else ifeq (\$(UNAME_S),Darwin)
+OBJS+=	ohash.o reallocarray.o strtonum.o
+else ifeq (\$(UNAME_S),FreeBSD)
+CFLAGS+=-D__dead="__dead2"
+OBJS+=	ohash.o reallocarray.o strtonum.o
+else ifeq (\$(UNAME_S),NetBSD)
+OBJS+=	ohash.o reallocarray.o strtonum.o
+else ifeq (\$(UNAME_S),OpenBSD)
+LIBS+=	-lutil
 else ifeq (\$(findstring CYGWIN,\$(UNAME_S)),CYGWIN)
 CFLAGS+=-D_GNU_SOURCE -D__dead="__attribute__((__noreturn__))"
 OBJS+=	ohash.o reallocarray.o strtonum.o
