@@ -90,6 +90,9 @@ CFLAGS+=-D__dead="__dead2"
 OBJS+=	ohash.o reallocarray.o strtonum.o
 else ifeq (\$(UNAME_S),NetBSD)
 OBJS+=	ohash.o reallocarray.o strtonum.o
+else ifeq (\$(UNAME_S),DragonFly)
+CFLAGS+=-D__dead="__dead2"
+OBJS+=	ohash.o reallocarray.o strtonum.o
 else ifeq (\$(UNAME_S),OpenBSD)
 LIBS+=	-lutil
 else ifeq (\$(findstring CYGWIN,\$(UNAME_S)),CYGWIN)
