@@ -4,37 +4,60 @@
 
 cflags="-O2 -pipe"
 
-printf "checking for C compiler... "
-/usr/bin/which cc > /dev/null 2>&1
-if [ $? -eq 0 ] ; then
-  echo "cc"
-  cc="cc"
-else
-  /usr/bin/which clang > /dev/null 2>&1
-  if [ $? -eq 0 ] ; then
-    echo "clang"
-    cc="clang"
-  else
-    /usr/bin/which gcc > /dev/null 2>&1
-    if [ $? -eq 0 ] ; then
-      echo "gcc"
-      cc="gcc"
+cccheck() {
+  for compiler in cc clang pcc gcc ; do
+    cat << EOF > conftest.c
+	int
+#if defined(__llvm__) && defined(__clang__)
+	c=0
+#elif defined(__PCC__)
+	c=0
+#elif defined(__GNUC__)
+	c=0
+#else
+	c=1
+#endif
+      ;
+      int main(void){return c;}
+EOF
+
+    "$compiler" -o conftest conftest.c > /dev/null 2>&1
+
+    if [[ $? -eq 0 ]] ; then
+      ./conftest
+      c=$?
+      rm -f conftest conftest.c
+
+      if [[ $c -eq 0 ]] ; then
+	cc="$compiler"
+	return 1
+      fi
     else
-      echo "not found"
-      echo "You must have a C compiler to build m4!"
-      exit 1
+      rm -f conftest.c
     fi
-  fi
+  done
+  return 0
+}
+
+# C compiler
+printf "checking for C compiler... "
+cccheck
+if [[ $? -eq 0 ]] ; then
+  echo "not found"
+  echo "Please install a C compiler and re-run configure."
+  exit 1
+else
+  echo "$cc"
 fi
 
 # Need lex and yacc
 printf "checking for lex... "
 /usr/bin/which lex > /dev/null 2>&1
-if [ $? -eq 0 ] ; then
+if [[ $? -eq 0 ]] ; then
   echo "yes"
 else
   /usr/bin/which flex > /dev/null 2>&1
-  if [ $? -eq 0 ] ; then
+  if [[ $? -eq 0 ]] ; then
     echo "yes"
   else
     echo "no"
@@ -45,11 +68,11 @@ fi
 
 printf "checking for yacc... "
 /usr/bin/which yacc > /dev/null 2>&1
-if [ $? -eq 0 ] ; then
+if [[ $? -eq 0 ]] ; then
   echo "yes"
 else
   /usr/bin/which bison > /dev/null 2>&1
-  if [ $? -eq 0 ] ; then
+  if [[ $? -eq 0 ]] ; then
   echo "yes"
   else
     echo "no"
@@ -61,7 +84,7 @@ fi
 # Set executable name accordingly
 printf "checking for m4... "
 /usr/bin/which m4 > /dev/null 2>&1
-if [ $? -eq 0 ] ; then
+if [[ $? -eq 0 ]] ; then
   echo "yes"
   m4name="om4"
 else
@@ -113,7 +136,7 @@ test:
 	@echo "No tests"
 
 parser.c parser.h: parser.y
-	\${YACC} -d parser.y && mv y.tab.c parser.c && mv y.tab.h parser.h
+	yacc -d parser.y && mv y.tab.c parser.c && mv y.tab.h parser.h
 
 tokenizer.o: parser.h
 

@@ -39,4 +39,4 @@ All files are a combination of BSD and ISC licensed files.
 
 Get a tarball
 -------------
-https://devio.us/~bcallah/m4/m4-20170929.tar.gz
+https://devio.us/~bcallah/m4/m4-20171027.tar.gz
