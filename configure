@@ -23,12 +23,12 @@ EOF
 
     "$compiler" -o conftest conftest.c > /dev/null 2>&1
 
-    if [[ $? -eq 0 ]] ; then
+    if [ $? -eq 0 ] ; then
       ./conftest
       c=$?
       rm -f conftest conftest.c
 
-      if [[ $c -eq 0 ]] ; then
+      if [ $c -eq 0 ] ; then
 	cc="$compiler"
 	return 1
       fi
@@ -42,7 +42,7 @@ EOF
 # C compiler
 printf "checking for C compiler... "
 cccheck
-if [[ $? -eq 0 ]] ; then
+if [ $? -eq 0 ] ; then
   echo "not found"
   echo "Please install a C compiler and re-run configure."
   exit 1
@@ -53,11 +53,11 @@ fi
 # Need lex and yacc
 printf "checking for lex... "
 /usr/bin/which lex > /dev/null 2>&1
-if [[ $? -eq 0 ]] ; then
+if [ $? -eq 0 ] ; then
   echo "yes"
 else
   /usr/bin/which flex > /dev/null 2>&1
-  if [[ $? -eq 0 ]] ; then
+  if [ $? -eq 0 ] ; then
     echo "yes"
   else
     echo "no"
@@ -68,11 +68,11 @@ fi
 
 printf "checking for yacc... "
 /usr/bin/which yacc > /dev/null 2>&1
-if [[ $? -eq 0 ]] ; then
+if [ $? -eq 0 ] ; then
   echo "yes"
 else
   /usr/bin/which bison > /dev/null 2>&1
-  if [[ $? -eq 0 ]] ; then
+  if [ $? -eq 0 ] ; then
   echo "yes"
   else
     echo "no"
@@ -84,7 +84,7 @@ fi
 # Set executable name accordingly
 printf "checking for m4... "
 /usr/bin/which m4 > /dev/null 2>&1
-if [[ $? -eq 0 ]] ; then
+if [ $? -eq 0 ] ; then
   echo "yes"
   m4name="om4"
 else
