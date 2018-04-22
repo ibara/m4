@@ -315,7 +315,7 @@ else
     echo "#define __dead __dead2" >> config.h
     echo "yes"
   else
-    printf "checking for __attribute__((__noreturn__))... " >> config.h
+    printf "checking for __attribute__((__noreturn__))... "
     noreturncheck
     if [ $? -eq 0 ] ; then
       echo "#define __dead __attribute__((__noreturn__))" >> config.h
