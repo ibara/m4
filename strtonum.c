@@ -21,6 +21,10 @@
 #include <limits.h>
 #include <stdlib.h>
 
+#include "config.h"
+
+#ifndef HAVE_STRTONUM
+
 #define	INVALID		1
 #define	TOOSMALL	2
 #define	TOOLARGE	3
@@ -63,3 +67,5 @@ strtonum(const char *numstr, long long minval, long long maxval,
 
 	return (ll);
 }
+
+#endif /* !HAVE_STRTONUM */

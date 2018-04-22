@@ -22,6 +22,10 @@
 #include <limits.h>
 #include "ohash.h"
 
+#include "config.h"
+
+#ifndef HAVE_OHASH
+
 struct _ohash_record {
 	uint32_t	hv;
 	const char	*p;
@@ -325,3 +329,5 @@ ohash_qlookupi(struct ohash *h, const char *s, const char **e)
 	hv = ohash_interval(s, e);
 	return ohash_lookup_interval(h, s, *e, hv);
 }
+
+#endif /* !HAVE_OHASH */

@@ -167,10 +167,10 @@ main(int argc, char *argv[])
 	int n;
 	char *p;
 
-#ifdef __OpenBSD__
+#ifdef HAVE_PLEDGE
 	if (pledge("stdio rpath wpath cpath tmppath proc exec", NULL) == -1)
 		err(1, "pledge");
-#endif
+#endif /* HAVE_PLEDGE */
 
 	if (signal(SIGINT, SIG_IGN) != SIG_IGN)
 		signal(SIGINT, onintr);

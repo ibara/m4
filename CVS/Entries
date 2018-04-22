@@ -2,17 +2,17 @@
 /main.c/1.87/Thu Jun 15 13:48:42 2017//
 D/PSD.doc////
 D/TEST////
-/Makefile/1.16/Sat Oct 28 01:54:25 2017//
-/NOTES/1.1.1.1/Sat Oct 28 01:54:25 2017//
-/eval.c/1.76/Sat Oct 28 01:54:38 2017//
-/expr.c/1.18/Sat Oct 28 01:54:25 2017//
-/gnum4.c/1.52/Sat Oct 28 01:54:25 2017//
-/look.c/1.24/Sat Oct 28 01:54:25 2017//
-/m4.1/1.64/Sat Oct 28 01:54:25 2017//
-/mdef.h/1.33/Sat Oct 28 01:54:25 2017//
-/misc.c/1.47/Sat Oct 28 01:54:25 2017//
-/parser.y/1.7/Sat Oct 28 01:54:25 2017//
-/pathnames.h/1.6/Sat Oct 28 01:54:25 2017//
-/stdd.h/1.6/Sat Oct 28 01:54:25 2017//
-/tokenizer.l/1.10/Sat Oct 28 01:54:25 2017//
-/trace.c/1.16/Sat Oct 28 01:54:25 2017//
+/Makefile/1.16/Sun Apr 22 20:45:40 2018//
+/NOTES/1.1.1.1/Sun Apr 22 20:45:40 2018//
+/eval.c/1.77/Sun Apr 22 20:45:46 2018//
+/expr.c/1.18/Sun Apr 22 20:45:40 2018//
+/gnum4.c/1.52/Sun Apr 22 20:45:40 2018//
+/look.c/1.24/Sun Apr 22 20:45:40 2018//
+/m4.1/1.64/Sun Apr 22 20:45:40 2018//
+/mdef.h/1.33/Sun Apr 22 20:45:40 2018//
+/misc.c/1.47/Sun Apr 22 20:45:40 2018//
+/parser.y/1.7/Sun Apr 22 20:45:40 2018//
+/pathnames.h/1.6/Sun Apr 22 20:45:40 2018//
+/stdd.h/1.6/Sun Apr 22 20:45:40 2018//
+/tokenizer.l/1.10/Sun Apr 22 20:45:40 2018//
+/trace.c/1.16/Sun Apr 22 20:45:40 2018//
