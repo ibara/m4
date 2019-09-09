@@ -53,7 +53,7 @@ EOF
 deadcheck() {
   cat << EOF > conftest.c
 #include <stdlib.h>
-__dead usage(void){exit(1);}int main(void){usage();return 0;}
+__dead void usage(void){exit(1);}int main(void){usage();return 0;}
 EOF
   $cc $tflags -o conftest conftest.c > /dev/null 2>&1
   if [ $? -eq 0 ] ; then
@@ -68,7 +68,7 @@ EOF
 dead2check() {
   cat << EOF > conftest.c
 #include <stdlib.h>
-__dead2 usage(void){exit(1);}int main(void){usage();return 0;}
+__dead2 void usage(void){exit(1);}int main(void){usage();return 0;}
 EOF
   $cc $tflags -o conftest conftest.c > /dev/null 2>&1
   if [ $? -eq 0 ] ; then
@@ -83,7 +83,7 @@ EOF
 noreturncheck() {
   cat << EOF > conftest.c
 #include <stdlib.h>
-void usage(void) __attribute__((__noreturn__)){exit(1);}int main(void){usage();return 0;}
+__attribute__((__no_return__)) void usage(void){exit(1);}int main(void){usage();return 0;}
 EOF
   $cc $tflags -o conftest conftest.c > /dev/null 2>&1
   if [ $? -eq 0 ] ; then
@@ -99,6 +99,7 @@ ohashinitcheck() {
   cat << EOF > conftest.c
 #include <stddef.h>
 #include <stdint.h>
+#include <stdio.h>
 #include <ohash.h>
 int main(void){ohash_init(NULL, 0, NULL);return 0;} 
 EOF
@@ -316,10 +317,10 @@ else
     echo "yes"
   else
     echo "no"
-    printf "checking for __attribute__((__noreturn__))... "
+    printf "checking for __attribute__((__no_return__))... "
     noreturncheck
     if [ $? -eq 0 ] ; then
-      echo "#define __dead __attribute__((__noreturn__))" >> config.h
+      echo "#define __dead __attribute__((__no_return__))" >> config.h
       echo "yes"
     else
       echo "#define __dead" >> config.h

@@ -11,7 +11,7 @@ that do not have a free m4 or have a very old m4.
 build.
 
 If you need a Yacc program, a dependency-free `yacc` is available here:
-https://devio.us/~bcallah/yacc/
+https://github.com/ibara/yacc/
 
 `m4` is known to build and run on all *BSD flavors, Linux, Mac OS X, Cygwin,
 AIX, and Solaris. It is very likely to run on other Unix flavors; please let
@@ -39,4 +39,4 @@ All files are a combination of BSD and ISC licensed files.
 
 Get a tarball
 -------------
-https://devio.us/~bcallah/m4/m4-20171027.tar.gz
+See releases tab. Latest is `om4-6.6`.
