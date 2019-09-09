@@ -390,8 +390,8 @@ fi
 cat << EOF >> Makefile
 PREFIX =	$prefix
 MANDIR =	$mandir
-PROG =		$instprog
 
+PROG =	$instprog
 OBJS =	eval.o expr.o look.o main.o misc.o gnum4.o trace.o tokenizer.o \\
 	parser.o ohash.o reallocarray.o strlcpy.o strtonum.o
 
@@ -409,10 +409,10 @@ install:
 	install -d \${DESTDIR}\${PREFIX}/bin
 	install -d \${DESTDIR}\${MANDIR}/man1
 	install -c -s -m 755 \${PROG} \${DESTDIR}\${PREFIX}/bin
-	install -c -m 644 om4.1 \${DESTDIR}\${MANDIR}/man1/\${PROG}.1
+	install -c -m 644 m4.1 \${DESTDIR}\${MANDIR}/man1/\${PROG}.1
 
 test:
-	echo "No tests"
+	@echo "No tests"
 
 clean:
 	rm -f \${PROG} \${OBJS} parser.c parser.h
