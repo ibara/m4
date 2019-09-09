@@ -7,8 +7,8 @@ m4
 It is suitable for ensuring standard m4 compliance, for older Unix machines
 that do not have a free m4 or have a very old m4.
 
-`m4` requires a C compiler, a Yacc program, a Lex program, and GNU make to
-build.
+`m4` requires a C compiler, a Yacc program, a Lex program, and a make program
+to build.
 
 If you need a Yacc program, a dependency-free `yacc` is available here:
 https://github.com/ibara/yacc/
