@@ -2,17 +2,17 @@
 /main.c/1.87/Thu Jun 15 13:48:42 2017//
 D/PSD.doc////
 D/TEST////
-/Makefile/1.16/Mon Sep  9 13:07:42 2019//
-/NOTES/1.1.1.1/Mon Sep  9 13:04:12 2019//
-/eval.c/1.78/Mon Sep  9 13:07:42 2019//
-/expr.c/1.18/Mon Sep  9 13:04:12 2019//
-/gnum4.c/1.52/Mon Sep  9 13:04:12 2019//
-/look.c/1.24/Mon Sep  9 13:04:12 2019//
-/m4.1/1.64/Mon Sep  9 13:04:12 2019//
-/mdef.h/1.33/Mon Sep  9 13:04:12 2019//
-/misc.c/1.47/Mon Sep  9 13:04:12 2019//
-/parser.y/1.7/Mon Sep  9 13:04:12 2019//
-/pathnames.h/1.6/Mon Sep  9 13:04:12 2019//
-/stdd.h/1.6/Mon Sep  9 13:04:12 2019//
-/tokenizer.l/1.10/Mon Sep  9 13:04:12 2019//
-/trace.c/1.16/Mon Sep  9 13:04:12 2019//
+/Makefile/1.16/Sat May  9 00:33:09 2020//
+/NOTES/1.1.1.1/Sat May  9 00:33:03 2020//
+/eval.c/1.78/Sat May  9 00:33:03 2020//
+/expr.c/1.18/Sat May  9 00:33:03 2020//
+/gnum4.c/1.52/Sat May  9 00:33:03 2020//
+/look.c/1.24/Sat May  9 00:33:03 2020//
+/m4.1/1.64/Sat May  9 00:33:03 2020//
+/mdef.h/1.33/Sat May  9 00:33:03 2020//
+/misc.c/1.47/Sat May  9 00:33:03 2020//
+/parser.y/1.7/Sat May  9 00:33:03 2020//
+/pathnames.h/1.6/Sat May  9 00:33:03 2020//
+/stdd.h/1.6/Sat May  9 00:33:03 2020//
+/tokenizer.l/1.10/Sat May  9 00:33:03 2020//
+/trace.c/1.16/Sat May  9 00:33:03 2020//
