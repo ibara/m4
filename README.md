@@ -39,4 +39,4 @@ All files are a combination of BSD and ISC licensed files.
 
 Get a tarball
 -------------
-See releases tab. Latest is `om4-6.6`.
+See releases tab. Latest is `om4-6.7`.
